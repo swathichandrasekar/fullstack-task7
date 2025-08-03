@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillUp Portal – Your Personalized Learning Journey</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #111;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .hero img {
+      width: 200px;
+      margin-top: 30px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #555;
+    }
+    .hero * {
+      position: relative;
+      z-index: 1;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .colored-box {
+      background-color: #fce4ec;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .features .box {
+      background-color: #e1bee7;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1 1 200px;
+      max-width: 250px;
+    }
+    footer {
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">SkillUp Portal</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#signup">Sign Up</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/users">User Management</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Welcome to SkillUp Portal</h1>
+    <p>"Connecting Minds. Building Futures."</p>
+    <br />
+    <a href="#signup" class="btn">Join</a>
+  </section>
+
+  <section id="quoteSection" style="padding: 30px; background: #f0f8ff; text-align: center;">
+    <h2 style="color: #2c3e50;">📚 Quote of the Day</h2>
+    <p id="quoteText" style="font-size: 20px; margin: 20px 0; color: #34495e;">
+      "Education is the most powerful weapon which you can use to change the world." – Nelson Mandela
+    </p>
+    <button onclick="generateNewQuote()">New Quote</button>
+  </section>
+
+  <section id="newsSection" style="padding: 30px; background: #fffbe6; text-align: center;">
+    <h2 style="color: #8e44ad;">📰 Latest Education News</h2>
+    <button onclick="toggleNews()" id="toggleNewsBtn">Show News</button>
+    <ul id="newsList" style="display: none; list-style: none; padding: 0; max-width: 800px; margin: auto; color: #2c3e50;"></ul>
+  </section>
+<script>
+  const quotes = [
+    "Learning never exhausts the mind. – Leonardo da Vinci",
+    "The beautiful thing about learning is nobody can take it away from you. – B.B. King",
+    "Live as if you were to die tomorrow. Learn as if you were to live forever. – Mahatma Gandhi",
+    "An investment in knowledge pays the best interest. – Benjamin Franklin"
+  ];
+   const news = [
+      { title: "AI Revolutionizes Classrooms", img: "https://images.unsplash.com/photo-1581090700227-1e8e06634c4b?auto=format&fit=crop&w=800&q=80", desc: "AI tools personalizing learning experiences globally." },
+      { title: "E‑Learning Platforms Soar", img: "https://images.unsplash.com/photo-1584697964403-ffb7f1e8a62f?auto=format&fit=crop&w=800&q=80", desc: "Online learning growth continues post‑2020." },
+      { title: "Hybrid Learning Gains Traction", img: "https://images.unsplash.com/photo-1600195077909-46e573870d1c?auto=format&fit=crop&w=800&q=80", desc: "Combining in‑person and online learning." },
+      { title: "Coding Education Expands", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", desc: "Coding included in early school curriculums." },
+      { title: "Educators Embrace Digital Tools", img: "https://images.unsplash.com/photo-1600172454520-876f2a6f9892?auto=format&fit=crop&w=800&q=80", desc: "Teachers using LMS, whiteboards, and apps." },
+      { title: "Rural Access via EdTech", img: "https://images.unsplash.com/photo-1544717305-996b815c338c?auto=format&fit=crop&w=800&q=80", desc: "Mobile learning reaches remote places." },
+      { title: "Green Education Frameworks", img: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80", desc: "Sustainability and eco-studies in curricula." }
+    ];
+  function generateNewQuote() {
+    const random = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quoteText").innerText = random;
+  }
+
+  function toggleNews() {
+    const list = document.getElementById("newsList");
+    const btn = document.getElementById("toggleNewsBtn");
+
+    if (list.style.display === "none" || list.innerHTML === "") {
+      list.innerHTML = news.map(n => `
+        <li style="margin-bottom: 30px; text-align: left;">
+          <img src="${n.img}" alt="${n.title}" style="width: 100%; max-width: 300px; height: auto; border-radius: 10px; margin-bottom: 10px;" />
+          <h4>${n.title}</h4>
+          <p>${n.desc}</p>
+        </li>
+      `).join("");
+      list.style.display = "block";
+      btn.innerText = "Hide News";
+    } else {
+      list.innerHTML = "";
+      list.style.display = "none";
+      btn.innerText = "Show News";
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+
+
+  <section class="section" id="about">
+    <h2>About Us</h2>
+    <div class="colored-box">
+      <p>
+        SkillUp Portal is a student-centric learning platform designed to guide learners on their educational journey.
+        We offer dynamic courses, expert mentors, and an intuitive interface to help every student upskill at their own pace.
+      </p>
+      <p>
+        Whether you're a beginner or looking to specialize, our portal offers the right tools and environment to grow.
+        Join a community of passionate learners and build your future with SkillUp.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>Features</h2>
+    <div class="features">
+      <div class="box">
+        <h3>Flexible Courses</h3>
+        <p>Learn at your own pace with modules designed for easy understanding and accessibility.</p>
+      </div>
+      <div class="box">
+        <h3>Mentorship Support</h3>
+        <p>Connect with experienced mentors to receive personalized guidance and feedback.</p>
+      </div>
+      <div class="box">
+        <h3>Skill Assessment</h3>
+        <p>Regular quizzes and projects help track your progress and reinforce learning.</p>
+      </div>
+      <div class="box">
+        <h3>Interactive UI</h3>
+        <p>Our user-friendly interface ensures a smooth and engaging learning experience.</p>
+      </div>
+    </div>
+  </section>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkillUp Portal – Sign Up</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .form-box {
+      max-width: 500px;
+      margin: auto;
+      background: #f8f8f8;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3a7bd5;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+
+    .success {
+      color: green;
+      font-size: 13px;
+    }
+
+    .field-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .toggle-eye {
+      position: absolute;
+      right: 10px;
+      top: 35px;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #3a7bd5;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #2a5cb8;
+    }
+  </style>
+       
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillUp Portal - Sign Up</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f7f7f7; }
+    form { max-width: 500px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .error { color: red; font-size: 0.9em; }
+    .success { color: green; font-size: 0.9em; }
+    .toggle-password { position: absolute; right: 15px; top: 37px; cursor: pointer; }
+    .password-wrapper { position: relative; }
+    button { background-color: black; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%; }
+  </style>
+</head>
+<body>
+  <form id="signupForm" action="/usercard" method="POST">
+    <h2>Sign Up</h2>
+    <div class="input-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+      <div class="error" id="nameError"></div>
+      <div class="success" id="nameSuccess"></div>
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+      <div class="error" id="emailError"></div>
+      <div class="success" id="emailSuccess"></div>
+    </div>
+
+    <div class="input-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" required />
+      <div class="error" id="ageError"></div>
+      <div class="success" id="ageSuccess"></div>
+    </div>
+
+    <div class="input-group">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" required />
+      <div class="error" id="phoneError"></div>
+      <div class="success" id="phoneSuccess"></div>
+    </div>
+
+    <div class="input-group password-wrapper">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+      <div class="error" id="passwordError"></div>
+      <div class="success" id="passwordSuccess"></div>
+    </div>
+
+    <div class="input-group password-wrapper">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required />
+      <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+      <div class="error" id="confirmPasswordError"></div>
+      <div class="success" id="confirmPasswordSuccess"></div>
+    </div>
+
+    <div class="input-group">
+      <label for="course">Select Course</label>
+      <select name="course" id="course" required>
+        <option value="">--Choose Course--</option>
+        <option value="Full Stack Development">Full Stack Development</option>
+        <option value="UI/UX Design">UI/UX Design</option>
+        <option value="Data Science">Data Science</option>
+      </select>
+      <div class="error" id="courseError"></div>
+      <div class="success" id="courseSuccess"></div>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function togglePassword(fieldId) {
+      const field = document.getElementById(fieldId);
+      field.type = field.type === 'password' ? 'text' : 'password';
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      let valid = true;
+
+      // Name Validation
+      const name = document.getElementById("name").value.trim();
+      if (name.length < 3) {
+        document.getElementById("nameError").innerText = "Name must be at least 3 characters.";
+        valid = false;
+      } else {
+        document.getElementById("nameError").innerText = "";
+        document.getElementById("nameSuccess").innerText = "Valid name.";
+      }
+
+      // Email Validation
+      const email = document.getElementById("email").value.trim();
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById("emailError").innerText = "Invalid email.";
+        valid = false;
+      } else {
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("emailSuccess").innerText = "Valid email.";
+      }
+
+      // Age Validation
+      const age = parseInt(document.getElementById("age").value);
+      if (isNaN(age) || age < 10 || age > 100) {
+        document.getElementById("ageError").innerText = "Enter valid age (10-100).";
+        valid = false;
+      } else {
+        document.getElementById("ageError").innerText = "";
+        document.getElementById("ageSuccess").innerText = "Valid age.";
+      }
+
+      // Phone Validation
+      const phone = document.getElementById("phone").value.trim();
+      if (!/^[0-9]{10}$/.test(phone)) {
+        document.getElementById("phoneError").innerText = "Enter 10-digit phone number.";
+        valid = false;
+      } else {
+        document.getElementById("phoneError").innerText = "";
+        document.getElementById("phoneSuccess").innerText = "Valid phone.";
+      }
+
+      // Password Validation
+      const password = document.getElementById("password").value;
+      if (password.length < 6) {
+        document.getElementById("passwordError").innerText = "Password must be at least 6 characters.";
+        valid = false;
+      } else {
+        document.getElementById("passwordError").innerText = "";
+        document.getElementById("passwordSuccess").innerText = "Valid password.";
+      }
+
+      // Confirm Password
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+        valid = false;
+      } else {
+        document.getElementById("confirmPasswordError").innerText = "";
+        document.getElementById("confirmPasswordSuccess").innerText = "Passwords match.";
+      }
+
+      // Course Validation
+      const course = document.getElementById("course").value;
+      if (course === "") {
+        document.getElementById("courseError").innerText = "Please select a course.";
+        valid = false;
+      } else {
+        document.getElementById("courseError").innerText = "";
+        document.getElementById("courseSuccess").innerText = "Course selected.";
+      }
+
+      if (!valid) e.preventDefault();
+    });
+  </script>
+<section class="section" id="contact">
+  <div class="colored-box">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:info@skillupportal.com">info@skillupportal.com</a></p>
+    <p>Phone: +91 9876543210</p>
+    <p>Address: 123 Learning Avenue, Knowledge City, India</p>
+  </div>
+</section>
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5faff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2b4b77;
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-left: 6px solid #007bff;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      flex-wrap: wrap;
+    }
+
+    .user-info {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .user-info span {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .actions button {
+      margin-left: 8px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .edit-btn {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 114, 255, 0.4);
+    }
+
+    .edit-btn:hover {
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+    }
+
+    .delete-btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 65, 108, 0.4);
+    }
+
+    .delete-btn:hover {
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    }
+  </style>
+</head>
+<body>
+  <h1>User Management</h1>
+
+  <% users.forEach(user => { %>
+    <div class="user-row">
+      <div class="user-info">
+        <span><strong>ID:</strong> <%= user.id %></span>
+        <span><strong>Name:</strong> <%= user.name %></span>
+        <span><strong>Email:</strong> <%= user.email %></span>
+        <span><strong>Phone:</strong> <%= user.phone %></span>
+        <span><strong>Age:</strong> <%= user.age %></span>
+        <span><strong>Course:</strong><%=user.course %></span>
+      </div>
+      <div class="actions">
+        <form action="/edit/<%= user.id %>" method="GET" style="display: inline;">
+          <button class="edit-btn" type="submit">✏️ Edit</button>
+        </form>
+        <form action="/delete/<%= user.id %>" method="POST" style="display: inline;">
+          <button class="delete-btn" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">🗑️ Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</body>
+</html>

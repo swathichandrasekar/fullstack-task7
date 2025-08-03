@@ -1,0 +1,234 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 15px 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+section {
+  padding: 30px 20px; /* reduced from 50 or 60px */
+  text-align: center;
+}
+
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+form input, form select, form button {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+form button {
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.features .box {
+  background-color: #d1c4e9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  padding: 10px 12px;
+  font-size: 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+.result-box {
+  background: white;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.back-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* move content toward top */
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 80px 20px 60px; /* more top padding, less bottom */
+  background: url("/images/students.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+
+.hero p {
+  color: #ffffff; /* bright white */
+  font-weight: 700;
+  font-size: 22px;
+  max-width: 700px;
+}
+
+
+.hero h1,
+.hero p,
+.hero .btn {
+  position: relative;
+  z-index: 1;
+}
+.hero p {
+  color: #ffffff; /* darker quote */
+  font-weight: 600;
+  font-size: 20px;
+}
+.about-box {
+  background-color: #4a148c; /* darker purple */
+  color: rgb(177, 125, 125);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+.error {
+  color: red;
+  font-size: 13px;
+  margin: 2px 0 5px;
+}
+.success {
+  color: green;
+  font-size: 13px;
+  margin: 2px 0 5px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* space for icon */
+}
+
+.password-wrapper .toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+/* Normal input styles if not already present */
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Password field container */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Eye icon style */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/709/709612.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+}
+
+.toggle-password.show {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/709/709611.png');
+}
+.join-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.join-btn:hover {
+  background-color: #0056b3;
+}
+.card-heading {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #1a73e8;
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 25px;
+  letter-spacing: 0.8px;
+}
+
+
+
